@@ -42,7 +42,7 @@ class APPF2eClientCommandProcessor(ClientCommandProcessor):
 
 class APPF2eContext(CommonContext):
     command_processor: int = APPF2eClientCommandProcessor
-    game = "AP Test"
+    game = "AP Pathfinder 2e"
     items_handling = 0b111  # full remote
 
     def __init__(self, server_address, password):
