@@ -1,149 +1,369 @@
 from dataclasses import dataclass
 
-from Options import Choice, OptionGroup, PerGameCommonOptions, Range, Toggle
+from Options import Choice, OptionGroup, PerGameCommonOptions, Range, Toggle, DefaultOnToggle, OptionSet
 
-# In this file, we define the options the player can pick.
-# The most common types of options are Toggle, Range and Choice.
-
-# Options will be in the game's template yaml.
-# They will be represented by checkboxes, sliders etc. on the game's options page on the website.
-# (Note: Options can also be made invisible from either of these places by overriding Option.visibility.
-#  APQuest doesn't have an example of this, but this can be used for secret / hidden / advanced options.)
+import data
+from .data import TRAITS, COMMON_ANCESTRIES, UNCOMMON_ANCESTRIES, RARE_ANCESTRIES, BACKGROUNDS
 
 
-# The first type of Option we'll discuss is the Toggle.
-# A toggle is an option that can either be on or off. This will be represented by a checkbox on the website.
-# The default for a toggle is "off".
-# If you want a toggle to be on by default, you can use the "DefaultOnToggle" class instead of the "Toggle" class.
-class HardMode(Toggle):
+class StrictLogic(DefaultOnToggle):
     """
-    In hard mode, the basic enemy and the final boss will have more health.
-    The Health Upgrades become progression, as they are now required to beat the final boss.
+    With strict logic the game will not allow the player to fight enemies who logically require a higher level or
+    more weapon or armor runes. With this setting off, the player is free to fight any enemies that they can reach.
     """
 
-    # The docstring of an option is used as the description on the website and in the template yaml.
-
-    # You'll also want to set a display name, which will determine what the option is called on the website.
-    display_name = "Hard Mode"
+    display_name = "Strict Logic"
 
 
-class Hammer(Toggle):
+class NumberOfRooms(Range):
     """
-    Adds another item to the itempool: The Hammer.
-    The top middle chest will now be locked behind a breakable wall, requiring the Hammer.
+    Determines the number of rooms in the dungeon. This includes the final boss room. Setting this value low can
+    cause issues with generation with large level ranges in single game worlds.
     """
 
-    display_name = "Hammer"
+    display_name = "Number of Rooms"
+
+    range_start = 2
+    range_end = 20
+    default = 5
 
 
-class ExtraStartingChest(Toggle):
+class NumberOfKeys(Range):
     """
-    Adds an extra chest in the bottom left, making room for an extra Confetti Cannon.
-    """
-
-    display_name = "Extra Starting Chest"
-
-
-class TrapChance(Range):
-    """
-    Percentage chance that any given Confetti Cannon will be replaced by a Math Trap.
+    Determines the number of keys that lock doors in the dungeon. This should be lower than the number of rooms and if
+    it is not will automatically be set to one less than the number of rooms.
     """
 
-    display_name = "Trap Chance"
+    display_name = "Number of Keys"
 
     range_start = 0
-    range_end = 100
+    range_end = 19
     default = 0
 
 
-class StartWithOneConfettiCannon(Toggle):
+class StartingLevel(Range):
     """
-    Start with a confetti cannon already in your inventory.
-    Why? Because you deserve it. You get to celebrate yourself without doing any work first.
-    """
-
-    display_name = "Start With One Confetti Cannon"
-
-
-# A Range is a numeric option with a min and max value. This will be represented by a slider on the website.
-class ConfettiExplosiveness(Range):
-    """
-    How much confetti each use of a confetti cannon will fire.
+    Determines what the starting level for the characters in the game will be.
     """
 
-    display_name = "Confetti Explosiveness"
+    display_name = "Starting Level"
+
+    range_start = 1
+    range_end = 20
+    default = 1
+
+
+class MaximumLevel(Range):
+    """
+    Determines what the maximum level that the characters will reach will be. This will be the level at which you will
+    fight the final boss. This should be equal to or higher than the starting level and will be set equal to the
+    starting level if it is not.
+    """
+
+    display_name = "Maximum Level"
+
+    range_start = 1
+    range_end = 20
+    default = 1
+
+
+class UseABP(Toggle):
+    """
+    With Automatic Bonus Progression on, your characters will be expected to be using the variant rule of the same
+    name. This will remove progressive weapon and armor runes from the game and logic will no longer expect you to
+    have them.
+    """
+
+    display_name = "Use Automatic Bonus Progression"
+
+
+class BossEncounter(Choice):
+    """
+    Determines the specifications for the boss encounter found in the final room. This will ignore other settings that
+    determine difficulty.
+
+    - Trivial: The boss will be a Trivial budget fight.
+    - Low: The boss will be a Low budget fight.
+    - Moderate: The boss will be a Moderate budget fight.
+    - Severe: The boss will be a Severe budget fight.
+    - Extreme: The boss will be an Extreme budget fight, but won't necessarily be a solo boss like in Plus4. This can
+    still be very difficult at lower levels.
+    - Plus4: The boss will be a single creature four levels higher than the characters. This will be more manageable
+    than Plus5 but will still be potentially extremely difficult at lower levels.
+    - Plus5: The boss will be a single creature five levels higher than the characters. This will likely prove
+    extremely difficult, especially at lower levels. Use with caution!
+    """
+
+    display_name = "Boss Encounter"
+
+    option_trivial = 0
+    option_low = 1
+    option_moderate = 2
+    option_severe = 3
+    option_extreme = 4
+    option_plus4 = 5
+    option_plus5 = 6
+
+    default = option_moderate
+
+
+class MinimumDifficulty(Choice):
+    """
+    Determines the minimum difficulty that the encounters will be. Keep in mind that Severe and Extreme encounters can
+    be very challenging at lower levels.
+    """
+
+    display_name = "Minimum Encounter Difficulty"
+
+    option_trivial = 0
+    option_low = 1
+    option_moderate = 2
+    option_severe = 3
+    option_extreme = 4
+
+    default = option_trivial
+
+
+class MaximumDifficulty(Choice):
+    """
+    Determines the maximum difficulty that the encounters will be. Keep in mind that Severe and Extreme encounters can
+    be very challenging at lower levels. This should be a higher difficulty than the minimum difficulty and if it isn't,
+    it will be automatically set to the same as the minimum difficulty.
+    """
+
+    display_name = "Maximum Encounter Difficulty"
+
+    option_trivial = 0
+    option_low = 1
+    option_moderate = 2
+    option_severe = 3
+    option_extreme = 4
+
+    default = option_severe
+
+
+class RandomizeHeritage(Toggle):
+    """
+    If this is on, the randomly generated Ancestries will also include a pre-selected random heritage. If this is off,
+    you will only receive a list of random Ancestries with the heritages being up to you.
+    """
+
+    display_name = "Randomize Heritage"
+
+
+class RandomizeSubclass(Toggle):
+    """
+    If this is on, the randomly generated classes will also include a pre-selected random subclass where applicable. If
+    this is off, you will only receive a list of random classes with the subclasses being up to you.
+    """
+
+    display_name = "Randomize Subclass"
+
+
+class AncestryBlacklist(OptionSet):
+    """
+    This prevents any Ancestries listed here from being randomly selected.
+
+    Use "_Common", "_Uncommon", or "_Rare" as a shortcut for all Ancestries of that rarity.
+    """
+
+    display_name = "Ancestry Blacklist"
+
+    valid_keys = (["_Common", "_Uncommon", "_Rare"]
+                  + sorted(data.COMMON_ANCESTRIES + data.UNCOMMON_ANCESTRIES + data.RARE_ANCESTRIES))
+
+
+class BackgroundBlacklist(OptionSet):
+    """
+    This prevents any Backgrounds listed here from being randomly selected.
+
+    Use "_Common", "_Uncommon", or "_Rare" as a shortcut for all Backgrounds of that rarity.
+    """
+
+    display_name = "Background Blacklist"
+
+    valid_keys = (["_Common", "_Uncommon", "_Rare"]
+                  + sorted(data.BACKGROUNDS[background]["name"] for background in data.BACKGROUNDS))
+
+
+class ClassBlacklist(OptionSet):
+    """
+    This prevents any Classes listed here from being randomly selected.
+    """
+
+    display_name = "Class Blacklist"
+
+    valid_keys = sorted(class_name for class_name in data.CLASSES)
+
+
+class ExtraWeapons(Range):
+    """
+    Determines how many extra weapons you will start with. The base amount is 4 and this amount is added to that.
+    """
+
+    display_name = "Extra Starting Weapons"
+
+    range_start = 0
+    range_end = 20
+    default = 0
+
+
+class ExtraArmors(Range):
+    """
+    Determines how many extra armors you will start with. The base amount is 4 and this amount is added to that.
+    """
+
+    display_name = "Extra Starting Armors"
 
     range_start = 0
     range_end = 10
-
-    # Range options must define an explicit default value.
-    default = 3
+    default = 0
 
 
-# A Choice is an option with multiple discrete choices. This will be represented by a dropdown on the website.
-class PlayerSprite(Choice):
+class StartingShields(Range):
     """
-    The sprite that the player will have.
+    Determines how many shields you start with. There is no base amount so this amount alone determines how many you
+    get.
     """
 
-    display_name = "Player Sprite"
+    display_name = "Starting Shields"
 
-    option_human = 0
-    option_duck = 1
-    option_horse = 2
-    option_cat = 3
-
-    # Choice options must define an explicit default value.
-    default = option_human
-
-    # For choices, you can also define aliases.
-    # For example, we could make it so "player_sprite: kitty" resolves to "player_sprite: cat" like this:
-    alias_kitty = option_cat
+    range_start = 0
+    range_end = 10
+    default = 2
 
 
-# We must now define a dataclass inheriting from PerGameCommonOptions that we put all our options in.
-# This is in the format "option_name_in_snake_case: OptionClassName".
+class ValidCreatureTraits(OptionSet):
+    """
+    Only creatures with these traits will be able to appear in random encounters. Leaving this empty is the same as
+    allowing every trait.
+
+    If you only allow a small number of traits then there may be issues creating encounters at certain level ranges.
+    If this happens, this will be reverted to allowing all traits.
+    """
+
+    display_name = "Valid Creature Traits"
+
+    valid_keys = sorted(data.TRAITS)
+
+
+class CreatureTraitBlacklist(OptionSet):
+    """
+    This prevents any creatures with traits listed here from appearing in random encounters. The default settings
+    block the Unique and Mythic traits because the former are typically NPCs from prewritten adventures and as such are
+    blocked to avoid spoilers while the latter require you to be playing with the Mythic variant rules. Feel free to
+    enable these traits if you wish. Note: If you have a maximum level of 20 and have set your boss to be Plus5, you
+    must enable at least Unique as currently all Level 25 creatures have that trait.
+    """
+
+    display_name = "Creature Trait Blacklist"
+
+    valid_keys = sorted(data.TRAITS)
+
+    default = {"Unique", "Mythic"}
+
+
+class BlockAPCreatures(DefaultOnToggle):
+    """
+    With this on, all creatures that have only appeared in the prewritten Adventure Paths will be prevented from
+    appearing in random encounters.
+    """
+
+    display_name = "Block Adventure Path Creatures"
+
+
+class IncludeHeroPoints(Toggle):
+    """
+    With this on, an item that provides one Hero Point to each of your characters will be added as a potential filler
+    item.
+    """
+
+    display_name = "Include Hero Points"
+
+
+class IncludeAncestryFeatTokens(Toggle):
+    """
+    With this on, an item that can be redeemed for a bonus Ancestry feat for one of your characters will be added as a
+    potential filler item.
+    """
+
+    display_name = "Include Ancestry Feat Tokens"
+
+
+class IncludeGeneralFeatTokens(Toggle):
+    """
+    With this on, an item that can be redeemed for a bonus General feat for one of your characters will be added as a
+    potential filler item.
+    """
+
+    display_name = "Include General Feat Tokens"
+
+
+class IncludeSkillTrainingTokens(Toggle):
+    """
+    With this on, an item that can be redeemed for a bonus skill training for one of your characters will be added as a
+    potential filler item.
+    """
+
+    display_name = "Include Skill Training Tokens"
+
+
+class IncludeExplorationActivities(Toggle):
+    """
+    With this on, items that unlock various exploration activities will be added to the item pool.
+    """
+
+    display_name = "Include Exploration Activities"
+
+
 @dataclass
 class APPF2eOptions(PerGameCommonOptions):
-    hard_mode: HardMode
-    hammer: Hammer
-    extra_starting_chest: ExtraStartingChest
-    start_with_one_confetti_cannon: StartWithOneConfettiCannon
-    trap_chance: TrapChance
-    confetti_explosiveness: ConfettiExplosiveness
-    player_sprite: PlayerSprite
+    strict_logic: StrictLogic
+    number_of_rooms: NumberOfRooms
+    number_of_keys: NumberOfKeys
+    starting_level: StartingLevel
+    maximum_level: MaximumLevel
+    use_abp: UseABP
+    boss_encounter: BossEncounter
+    minimum_difficulty: MinimumDifficulty
+    maximum_difficulty: MaximumDifficulty
+    randomize_heritage: RandomizeHeritage
+    randomize_subclass: RandomizeSubclass
+    ancestry_blacklist: AncestryBlacklist
+    background_blacklist: BackgroundBlacklist
+    class_blacklist: ClassBlacklist
+    extra_weapons: ExtraWeapons
+    extra_armors: ExtraArmors
+    starting_shields: StartingShields
+    valid_creatures: ValidCreatureTraits
+    creature_blacklist: CreatureTraitBlacklist
+    block_ap_creatures: BlockAPCreatures
+    include_hero_points: IncludeHeroPoints
+    include_ancestry_feat_tokens: IncludeAncestryFeatTokens
+    include_general_feat_tokens: IncludeGeneralFeatTokens
+    include_skill_training_tokens: IncludeSkillTrainingTokens
+    include_exploration_activities: IncludeExplorationActivities
 
 
-# If we want to group our options by similar type, we can do so as well. This looks nice on the website.
 option_groups = [
     OptionGroup(
-        "Gameplay Options",
-        [HardMode, Hammer, ExtraStartingChest, StartWithOneConfettiCannon, TrapChance],
+        "Dungeon Options",
+        [NumberOfRooms, NumberOfKeys, StartingLevel, MaximumLevel, UseABP,
+         BossEncounter, MinimumDifficulty, MaximumDifficulty,],
     ),
     OptionGroup(
-        "Aesthetic Options",
-        [ConfettiExplosiveness, PlayerSprite],
+        "Character Options",
+        [RandomizeHeritage, RandomizeSubclass, AncestryBlacklist, BackgroundBlacklist, ClassBlacklist,
+         ExtraWeapons, ExtraArmors, StartingShields],
     ),
+    OptionGroup(
+        "Creature Options",
+        [ValidCreatureTraits, CreatureTraitBlacklist, BlockAPCreatures],
+    ),
+    OptionGroup(
+        "Extra Item Options",
+        [IncludeHeroPoints, IncludeAncestryFeatTokens, IncludeGeneralFeatTokens, IncludeSkillTrainingTokens,
+         IncludeExplorationActivities],
+    )
 ]
 
-# Finally, we can define some option presets if we want the player to be able to quickly choose a specific "mode".
-option_presets = {
-    "boring": {
-        "hard_mode": False,
-        "hammer": False,
-        "extra_starting_chest": False,
-        "start_with_one_confetti_cannon": False,
-        "trap_chance": 0,
-        "confetti_explosiveness": ConfettiExplosiveness.range_start,
-        "player_sprite": PlayerSprite.option_human,
-    },
-    "the true way to play": {
-        "hard_mode": True,
-        "hammer": True,
-        "extra_starting_chest": True,
-        "start_with_one_confetti_cannon": True,
-        "trap_chance": 50,
-        "confetti_explosiveness": ConfettiExplosiveness.range_end,
-        "player_sprite": PlayerSprite.option_duck,
-    },
-}

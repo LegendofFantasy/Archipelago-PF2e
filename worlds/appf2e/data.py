@@ -455,6 +455,63 @@ ANCESTRIES = {
     ]
 }
 
+COMMON_ANCESTRIES = [
+    "Dwarf",
+    "Elf",
+    "Gnome",
+    "Goblin",
+    "Halfling",
+    "Human",
+    "Leshy",
+    "Orc"
+]
+
+UNCOMMON_ANCESTRIES = [
+    "Athamaru",
+    "Azarketi",
+    "Catfolk",
+    "Centaur",
+    "Fetchling",
+    "Hobgoblin",
+    "Kholo",
+    "Kitsune",
+    "Kobold",
+    "Lizardfolk",
+    "Merfolk",
+    "Minotaur",
+    "Nagaji",
+    "Ratfolk",
+    "Samsaran",
+    "Tanuki",
+    "Tengu",
+    "Tripkee",
+    "Wayang"
+]
+
+RARE_ANCESTRIES = [
+    "Anadi",
+    "Android",
+    "Automaton",
+    "Awakened Animal",
+    "Conrasu",
+    "Fleshwarp",
+    "Ghoran",
+    "Goloma",
+    "Jotunborn",
+    "Kashrishi",
+    "Poppet",
+    "Sarangay",
+    "Shisk",
+    "Shoony",
+    "Skeleton",
+    "Sprite",
+    "Strix",
+    "Surki",
+    "Vishkanya",
+    "Yaksha",
+    "Yaoguai"
+]
+
 ARMORS = import_data("armors.json")
 
 BACKGROUNDS = import_data("backgrounds.json")
@@ -746,5 +803,11 @@ VERSATILE_HERITAGES = [
 
 WEAPONS = import_data("weapons.json")
 
+TRAITS = set()
 
+for creature in CREATURES:
+    traits = CREATURES[creature]["trait"].split(", ")
+    for trait in traits:
+        if trait not in TRAITS:
+            TRAITS.add(trait)
 
