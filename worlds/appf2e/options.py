@@ -349,7 +349,7 @@ option_groups = [
     OptionGroup(
         "Dungeon Options",
         [NumberOfRooms, NumberOfKeys, StartingLevel, MaximumLevel, UseABP,
-         BossEncounter, MinimumDifficulty, MaximumDifficulty,],
+         BossEncounter, MinimumDifficulty, MaximumDifficulty, StrictLogic],
     ),
     OptionGroup(
         "Character Options",
