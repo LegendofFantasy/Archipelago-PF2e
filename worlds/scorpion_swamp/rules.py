@@ -24,7 +24,7 @@ def set_all_location_rules(world: ScorpionSwampWorld) -> None:
     if world.options.clearingsanity:
         set_rule(world.get_location("Slay the Ranger"),
                  lambda state: state.has_all(("Clearing 35", "Clearing 13"), world.player) and
-                               (state.has_all(("Clearing 29", "Clearing 18", "Clearing 34", "Clearing 4"),
+                               ((state.has_all(("Clearing 29", "Clearing 18", "Clearing 34", "Clearing 4"),
                                               world.player) and (
                                 state.has_all(("Clearing 9", "Clearing 20", "Clearing 33"), world.player) or
                                 state.has_all(("Clearing 9", "Clearing 5"), world.player) or
@@ -33,11 +33,11 @@ def set_all_location_rules(world: ScorpionSwampWorld) -> None:
                                (state.has_all(("Clearing 24", "Clearing 17", "Clearing 12"), world.player) and (
                                  state.has_all(("Clearing 5", "Clearing 9"), world.player) or
                                  state.has_all(("Clearing 26", "Clearing 3"), world.player)
-                               ))
+                               )))
                  )
         set_rule(world.get_location("Slay the Master of Gardens"),
                  lambda state: state.has_all(("Clearing 35", "Clearing 13"), world.player) and
-                               (state.has_all(("Clearing 29", "Clearing 18", "Clearing 34", "Clearing 4"),
+                               ((state.has_all(("Clearing 29", "Clearing 18", "Clearing 34", "Clearing 4"),
                                               world.player) and (
                                         state.has_all(("Clearing 9", "Clearing 20", "Clearing 33"), world.player) or
                                         state.has_all(("Clearing 9", "Clearing 5"), world.player) or
@@ -47,12 +47,12 @@ def set_all_location_rules(world: ScorpionSwampWorld) -> None:
                                (state.has_all(("Clearing 24", "Clearing 17", "Clearing 12"), world.player) and (
                                        state.has_all(("Clearing 5", "Clearing 9"), world.player) or
                                        state.has_all(("Clearing 26", "Clearing 3"), world.player)
-                               ))
+                               )))
                  )
         if world.options.spellsanity:
             set_rule(world.get_location("Rob the Master of Frogs"),
                      lambda state: state.has_all(("Clearing 26", "Illusion Spell Gem"), world.player) and
-                                   (state.has("Clearing 24", world.player) and (
+                                   ((state.has("Clearing 24", world.player) and (
                                        state.has_all(("Clearing 5", "Clearing 29", "Clearing 18", "Clearing 34",
                                                       "Clearing 4"), world.player) or
                                        state.has_all(("Clearing 17", "Clearing 12"), world.player)
@@ -61,12 +61,12 @@ def set_all_location_rules(world: ScorpionSwampWorld) -> None:
                                                    "Clearing 18", "Clearing 34", "Clearing 4"), world.player) and (
                                        state.has_all(("Clearing 20", "Clearing 33"), world.player) or
                                        state.has("Clearing 5", world.player)
-                                   ))
+                                   )))
                      )
         else:
             set_rule(world.get_location("Rob the Master of Frogs"),
                      lambda state: state.has("Clearing 26", world.player) and
-                                   (state.has("Clearing 24", world.player) and (
+                                   ((state.has("Clearing 24", world.player) and (
                                            state.has_all(("Clearing 5", "Clearing 29", "Clearing 18", "Clearing 34",
                                                           "Clearing 4"), world.player) or
                                            state.has_all(("Clearing 17", "Clearing 12"), world.player)
@@ -75,7 +75,7 @@ def set_all_location_rules(world: ScorpionSwampWorld) -> None:
                                                    "Clearing 18", "Clearing 34", "Clearing 4"), world.player) and (
                                             state.has_all(("Clearing 20", "Clearing 33"), world.player) or
                                             state.has("Clearing 5", world.player)
-                                   ))
+                                   )))
                      )
 
     # Set rules for extra locations, all of which need spellsanity for rules
