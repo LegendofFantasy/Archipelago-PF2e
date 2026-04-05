@@ -42,7 +42,14 @@ if __name__ == "__main__":
 
 from NetUtils import NetworkItem, ClientStatus
 from CommonClient import logger, get_base_parser, ClientCommandProcessor, \
-    CommonContext, server_loop
+    server_loop
+
+tracker_loaded = False
+try:
+    from worlds.tracker.TrackerClient import TrackerGameContext as SuperContext
+    tracker_loaded = True
+except ModuleNotFoundError:
+    from CommonClient import CommonContext as SuperContext
 
 try:
     from Utils import gui_enabled
@@ -57,9 +64,10 @@ def check_stdin() -> None:
 class ScorpionSwampClientCommandProcessor(ClientCommandProcessor):
     pass
 
-class ScorpionSwampContext(CommonContext):
+class ScorpionSwampContext(SuperContext):
     command_processor: int = ScorpionSwampClientCommandProcessor
     game = "Scorpion Swamp"
+    tags = {"AP"}
     items_handling = 0b111  # full remote
 
     def __init__(self, server_address, password):
@@ -112,6 +120,8 @@ class ScorpionSwampContext(CommonContext):
                     os.remove(root+"/"+file)
 
     def on_package(self, cmd: str, args: dict):
+
+        super().on_package(cmd, args)
 
         if cmd in {"RoomInfo"}:
             if not self.scouts_seed:
@@ -198,20 +208,10 @@ class ScorpionSwampContext(CommonContext):
                     with open(os.path.join(self.game_communication_path, "grimslade"), 'w') as f:
                         f.close()
 
-
-    def run_gui(self):
-        """Import kivy UI system and start running it as self.ui_task."""
-        from kvui import GameManager
-
-        class ScorpionSwampManager(GameManager):
-            logging_pairs = [
-                ("Client", "Archipelago")
-            ]
-            base_title = "Archipelago Scorpion Swamp Client"
-
-        self.ui = ScorpionSwampManager(self)
-        self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
-
+    def make_gui(self):
+        ui = super().make_gui()
+        ui.base_title = "Archipelago Scorpion Swamp Client"
+        return ui
 
 async def game_watcher(ctx: ScorpionSwampContext):
     while not ctx.exit_event.is_set():
@@ -286,6 +286,8 @@ def launch_scorpion_swamp_client():
     async def main(args):
         ctx = ScorpionSwampContext(args.connect, args.password)
         ctx.server_task = asyncio.create_task(server_loop(ctx), name="server loop")
+        if tracker_loaded:
+            ctx.run_generator()
         if gui_enabled:
             ctx.run_gui()
         ctx.run_cli()
