@@ -161,7 +161,8 @@ LOCATION_NAME_GROUPS = {
         "Game Over - Magic Carpet Ride",
         "Game Over - Grimslade's Trap",
         "Game Over - Explosion of Hellfire",
-        "Game Over - Returning to Grimslade Empty-Handed"
+        "Game Over - Returning to Grimslade Empty-Handed",
+        "Game Over - Curse of the Birds"
     }
 }
 

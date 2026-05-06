@@ -135,6 +135,10 @@ def connect_regions(world: ScorpionSwampWorld) -> None:
 
     # Connect Clearing 33
     connect_clearings(world, 33, [29, 20])
+    # Clearing 33 connects to 35 using an Ice Spell Gem; only relevant for clearingsanity and spellsanity
+    if world.options.clearingsanity and world.options.spellsanity:
+        world.get_region("Clearing 33").connect(world.get_region("Clearing 35"), "Clearing 33 to Clearing 35",
+                               lambda state: state.has_all(("Clearing 35", "Ice Spell Gem"), world.player))
 
     # Connect Clearing 34
     connect_clearings(world, 34, [18, 4])
