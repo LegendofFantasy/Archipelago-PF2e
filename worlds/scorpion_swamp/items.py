@@ -168,6 +168,9 @@ def create_item_with_correct_classification(world: ScorpionSwampWorld, name: str
     if name in {"Curse Spell Gem", "Ice Spell Gem"} and world.options.extra_locations:
         classification |= ItemClassification.progression
 
+    if name == "Ice Spell Gem" and world.options.clearingsanity:
+        classification |= ItemClassification.progression
+
     return ScorpionSwampItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
 
