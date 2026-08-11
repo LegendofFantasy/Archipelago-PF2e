@@ -45,6 +45,9 @@ class ProgressiveStats(Toggle):
     Adds additional items to the item pool that increase the minimum values of each of your stats at the beginning
     of each run. For example, if you have three Progressive Skill items your Skill will be in the range of 10-12
     instead of 7-12.
+
+    If this setting is on, Extra Locations will be forced on as well regardless of your settings to accommodate the
+    additional items.
     """
 
     display_name = "Progressive Statistics"
@@ -132,7 +135,7 @@ option_groups = [
 ]
 
 option_presets = {
-    "recommended": {
+    "Recommended": {
         "goal": Goal.option_all,
         "required_amulets": 5,
         "clearingsanity": True,
