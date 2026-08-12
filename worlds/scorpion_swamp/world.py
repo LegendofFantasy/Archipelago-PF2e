@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from BaseClasses import MultiWorld
 from worlds.AutoWorld import World
@@ -28,6 +28,12 @@ class ScorpionSwampWorld(World):
     origin_region_name = "Fenmarge"
 
     ut_can_gen_without_yaml = True
+    tracker_world: ClassVar[dict[str, Any]] = {
+        "map_page_folder": "tracker",
+        "map_page_maps": "maps/maps.json",
+        "map_page_locations": "locations/locations.json",
+        "map_page_groups": [('Main', ['main'])],
+    }
 
     def __init__(self, world: MultiWorld, player: int):
         super().__init__(world, player)
