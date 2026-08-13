@@ -1,0 +1,866 @@
+[
+  {
+    "name": "Selator",
+    "sections": [
+      {
+        "name": "Game Over - Failing Selator's Quest",
+        "item_count": 1
+      },
+      {
+        "name": "Gronar - Directions to Selator",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 1",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 2",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 3",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 4",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 5",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 6",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 7",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 8",
+        "item_count": 1
+      },
+      {
+        "name": "Selator's Spell Gem 9",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 255,
+        "y": 1026,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Poomchukker",
+    "sections": [
+      {
+        "name": "Game Over - A Hundred Pieces of Gold",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Failing Poomchukker's Quest",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Out the Window and Into the Dungeons",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Slain by Poomchukker's Guards",
+        "item_count": 1
+      },
+      {
+        "name": "Gronar - Directions to Poomchukker",
+        "item_count": 1
+      },
+      {
+        "name": "Poomchukker's Spell Gem 1",
+        "item_count": 1
+      },
+      {
+        "name": "Poomchukker's Spell Gem 2",
+        "item_count": 1
+      },
+      {
+        "name": "Poomchukker's Spell Gem 3",
+        "item_count": 1
+      },
+      {
+        "name": "Poomchukker's Spell Gem 4",
+        "item_count": 1
+      },
+      {
+        "name": "Poomchukker's Spell Gem 5",
+        "item_count": 1
+      },
+      {
+        "name": "Poomchukker's Spell Gem 6",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 319,
+        "y": 1057,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Grimslade",
+    "sections": [
+      {
+        "name": "Game Over - Explosion of Hellfire",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Grimslade's Trap",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Itsy Bitsy Spider",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Magic Carpet Ride",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Returning to Grimslade Empty-Handed",
+        "item_count": 1
+      },
+      {
+        "name": "Gift from Grimslade",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 1",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 2",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 3",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 4",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 5",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 6",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 7",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 8",
+        "item_count": 1
+      },
+      {
+        "name": "Grimslade's Spell Gem 9",
+        "item_count": 1
+      },
+      {
+        "name": "Gronar - Directions to Grimslade",
+        "item_count": 1
+      },
+      {
+        "name": "Slay Grimslade",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 388,
+        "y": 1025,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 1",
+    "sections": [
+      {
+        "name": "Clearing 1 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - A Feast for Rats",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 320,
+        "y": 915,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 4",
+    "sections": [
+      {
+        "name": "Clearing 4 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Gift from the Master of Wolves",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 211,
+        "y": 915,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 12",
+    "sections": [
+      {
+        "name": "Clearing 12 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 439,
+        "y": 914,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 25",
+    "sections": [
+      {
+        "name": "Clearing 25 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Pool Beast",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 560,
+        "y": 912,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 34",
+    "sections": [
+      {
+        "name": "Clearing 34 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 211,
+        "y": 794,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 18",
+    "sections": [
+      {
+        "name": "Clearing 18 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Sword Trees",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 211,
+        "y": 679,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 6",
+    "sections": [
+      {
+        "name": "Clearing 6 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Dire Beast",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 109,
+        "y": 678,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 17",
+    "sections": [
+      {
+        "name": "Clearing 17 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - A Feast for the Spiders",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - The Master of Spiders Has No Friends",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 440,
+        "y": 683,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 23",
+    "sections": [
+      {
+        "name": "Clearing 23 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 107,
+        "y": 570,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 29",
+    "sections": [
+      {
+        "name": "Clearing 29 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Unicorn",
+        "item_count": 1
+      },
+      {
+        "name": "Unicorn Clearing Spell Gem 1",
+        "item_count": 1
+      },
+      {
+        "name": "Unicorn Clearing Spell Gem 2",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 211,
+        "y": 570,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 8",
+    "sections": [
+      {
+        "name": "Clearing 8 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 555,
+        "y": 681,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 5",
+    "sections": [
+      {
+        "name": "Clearing 5 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Fallen Fighter",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 308,
+        "y": 571,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 24",
+    "sections": [
+      {
+        "name": "Clearing 24 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 437,
+        "y": 570,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 26",
+    "sections": [
+      {
+        "name": "Clearing 26 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 553,
+        "y": 569,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 9",
+    "sections": [
+      {
+        "name": "Clearing 9 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Thief",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 311,
+        "y": 469,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 13",
+    "sections": [
+      {
+        "name": "Clearing 13 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 437,
+        "y": 467,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 3",
+    "sections": [
+      {
+        "name": "Clearing 3 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 553,
+        "y": 470,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 21",
+    "sections": [
+      {
+        "name": "Clearing 21 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 650,
+        "y": 469,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 33",
+    "sections": [
+      {
+        "name": "Clearing 33 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Dragged Down Into the River",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 208,
+        "y": 374,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 14",
+    "sections": [
+      {
+        "name": "Clearing 14 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Curse of the Birds",
+        "item_count": 1
+      },
+      {
+        "name": "Gift from the Mistress of Birds",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Parrot",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 106,
+        "y": 469,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 20",
+    "sections": [
+      {
+        "name": "Clearing 20 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Game Over - Crocodile Smile",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 312,
+        "y": 371,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 35",
+    "sections": [
+      {
+        "name": "Clearing 35 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 437,
+        "y": 371,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 30",
+    "sections": [
+      {
+        "name": "Clearing 30 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 548,
+        "y": 270,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 16",
+    "sections": [
+      {
+        "name": "Clearing 16 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Eagle's Nest",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 437,
+        "y": 270,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 32",
+    "sections": [
+      {
+        "name": "Clearing 32 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 312,
+        "y": 270,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 7",
+    "sections": [
+      {
+        "name": "Clearing 7 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 548,
+        "y": 172,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 11",
+    "sections": [
+      {
+        "name": "Clearing 11 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 547,
+        "y": 79,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 27",
+    "sections": [
+      {
+        "name": "Clearing 27 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Gift from the Master of Gardens 1",
+        "item_count": 1
+      },
+      {
+        "name": "Gift from the Master of Gardens 2",
+        "item_count": 1
+      },
+      {
+        "name": "Gift from the Master of Gardens 3",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 432,
+        "y": 78,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 19",
+    "sections": [
+      {
+        "name": "Clearing 19 Entered",
+        "item_count": 1
+      },
+      {
+        "name": "Slay the Ranger",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 313,
+        "y": 79,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 15",
+    "sections": [
+      {
+        "name": "Clearing 15 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 209,
+        "y": 171,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 28",
+    "sections": [
+      {
+        "name": "Clearing 28 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 209,
+        "y": 269,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Clearing 10",
+    "sections": [
+      {
+        "name": "Clearing 10 Entered",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 107,
+        "y": 266,
+        "size": 32
+      }
+    ]
+  },
+  {
+    "name": "Willowbend",
+    "sections": [
+      {
+        "name": "Halicar's Shop 1",
+        "item_count": 1
+      },
+      {
+        "name": "Halicar's Shop 2",
+        "item_count": 1
+      },
+      {
+        "name": "Halicar's Shop 3",
+        "item_count": 1
+      },
+      {
+        "name": "Halicar's Shop 4",
+        "item_count": 1
+      },
+      {
+        "name": "Halicar's Shop 5",
+        "item_count": 1
+      },
+      {
+        "name": "Halicar's Shop 6",
+        "item_count": 1
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "main",
+        "x": 106,
+        "y": 81,
+        "size": 32
+      }
+    ]
+  }
+]
