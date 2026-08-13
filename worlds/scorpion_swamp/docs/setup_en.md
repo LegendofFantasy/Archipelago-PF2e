@@ -4,7 +4,7 @@
 
 - [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases/latest)
 - [The Scorpion Swamp apworld]()
-- [The Scorpion Swamp companion app]()
+- [The Scorpion Swamp companion app](https://github.com/LegendofFantasy/Scorpion-Swamp-Companion/releases/latest)
 - (OPTIONAL) [The Universal Tracker apworld](https://github.com/FarisTheAncient/Archipelago/releases?q=Tracker)
 
 ## How to play
