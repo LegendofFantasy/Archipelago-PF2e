@@ -28,4 +28,5 @@ Preferences menu.
 they lead to. Text uniquely added for playing in Archipelago will appear as well, typically to let you know what item(s)
 you have found in a location but may also include any randomizer-specific overrides necessary for the given text. Dice
 rolling, inventory management, and stat tracking are handled by the companion app along with all communications with
-Archipelago.
+Archipelago. More information about the companion app and its features can be found
+[here](https://github.com/LegendofFantasy/Scorpion-Swamp-Companion/blob/main/README.md).
