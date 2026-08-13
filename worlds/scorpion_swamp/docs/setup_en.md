@@ -7,6 +7,10 @@
 - [The Scorpion Swamp companion app](https://github.com/LegendofFantasy/Scorpion-Swamp-Companion/releases/latest)
 - (OPTIONAL) [The Universal Tracker apworld](https://github.com/FarisTheAncient/Archipelago/releases?q=Tracker)
 
+## Also Required
+
+- The book, Scorpion Swamp.
+
 ## How to play
 
 1. Install the Scorpion Swamp apworld if you haven't already by double-clicking it or manually placing it in the 
