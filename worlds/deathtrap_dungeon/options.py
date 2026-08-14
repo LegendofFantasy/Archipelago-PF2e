@@ -1,33 +1,58 @@
 from dataclasses import dataclass
 
-from Options import Choice, OptionGroup, PerGameCommonOptions, ItemDict, Toggle, NamedRange
+from Options import OptionGroup, PerGameCommonOptions, ItemDict, Toggle, Range
 
 
-class Clearingsanity(Toggle):
+class Trialmastersanity(Toggle):
     """
-    Makes entering every clearing for the first time a location and adds items named "Clearing x" to
-    the item pool where x is the clearing's number. These new items will be needed to access their respective
-    clearing in the first place.
-    """
-
-    display_name = "Clearingsanity"
-
-
-class Spellsanity(Toggle):
-    """
-    Adds all the places in the game where you can get Spell Gems as new locations and shuffles the
-    vanilla Spell Gems into the item pool.
+    Adds all the Trialmasters to the item pool. You will need their respective items for them to appear in the game.
+    A location will be added for meeting each one for the first time.
     """
 
-    display_name = "Spellsanity"
+    display_name = "Trialmastersanity"
 
-class Wizardsanity(Toggle):
+
+class Championsanity(Toggle):
     """
-    Adds the three wizards to the item pool. You will always start with one of them. Three locations will be added
-    where you get directions to where the wizards live.
+    Adds all the other Champions to the item pool. You will need their respective items for them to appear in the game.
+    A location will be added for meeting each one for the first time.
     """
 
-    display_name = "Wizardsanity"
+    display_name = "Championsanity"
+
+class ShufflePotion(Toggle):
+    """
+    Shuffles the potion you start the game with, creating a new location that you will get right away. The potion added
+    to the pool will be selected randomly.
+    """
+
+    display_name = "Shuffle Potion"
+
+class ShuffleShield(Toggle):
+    """
+    Shuffles the shield you start the game with, creating a new location that you will get right away.
+    """
+
+    display_name = "Shuffle Shield"
+
+class GemHunt(Toggle):
+    """
+    Adds a requirement that you have all the gems available in the game (the always required Emerald, Sapphire, and
+    Diamond as well as the usually unnecessary Pearl, Topaz, Ruby, and Garnet) in order to reach the goal.
+    """
+
+    display_name = "Gem Hunt"
+
+class PackSize(Range):
+    """
+    Sets the amount of provisions that you will get when you receive a "Pack of Provisions" item. If you make this
+    value negative, Packs of Provisions will be classified as traps instead of filler.
+    """
+
+    display_name = "Pack Size"
+    range_start = -10
+    range_end = 10
+    default = 2
 
 
 class ExtraLocations(Toggle):
@@ -53,67 +78,29 @@ class ProgressiveStats(Toggle):
     display_name = "Progressive Statistics"
 
 
-class Goal(Choice):
-    """
-    The goal of the run.
-
-    Selator/Poomchukker/Grimslade - Complete this quest in the game to win.
-
-    Any - Any of the quests can be completed to win.
-
-    All - All the quests must be separately completed to win.
-    """
-
-    display_name = "Goal"
-
-    option_any = 0
-    option_selator = 1
-    option_poomchukker = 2
-    option_grimslade = 3
-    option_all = 4
-
-    default = option_any
-
-    alias_good = option_selator
-    alias_neutral = option_poomchukker
-    alias_evil = option_grimslade
-
-
-class RequiredAmulets(NamedRange):
-    """
-    Makes Grimslade's quest require this many Amulets to be completed.
-    """
-
-    display_name = "Required Amulets"
-    range_start = 0
-    range_end = 5
-    default = -1
-    special_range_names = {"vanilla" : -1}
-
 class FillerWeights(ItemDict):
     """
     For any filler items that are added, these are the weights that each choice will be added. Any of the game's items
     can be added to this list if desired. Leave it as the default if you don't know what you're doing.
 
-    If all weights are 0, the filler items will all be Stamina Spell Gems.
+    If all weights are 0, the filler items will all be Packs of Provisions.
     """
 
     display_name = "Filler Weights"
 
     default = {
-        "Skill Spell Gem" : 1,
-        "Stamina Spell Gem" : 1,
-        "Luck Spell Gem" : 1
+        "Pack of Provisions" : 1
     }
 
 
 @dataclass
 class DeathtrapDungeonOptions(PerGameCommonOptions):
-    goal : Goal
-    required_amulets : RequiredAmulets
-    clearingsanity : Clearingsanity
-    spellsanity : Spellsanity
-    wizardsanity : Wizardsanity
+    pack_size : PackSize
+    gem_hunt : GemHunt
+    shuffle_shield : ShuffleShield
+    shuffle_potion : ShufflePotion
+    trialmastersanity : Trialmastersanity
+    championsanity : Championsanity
     extra_locations : ExtraLocations
     progressive_stats : ProgressiveStats
     filler_weights : FillerWeights
@@ -122,25 +109,26 @@ class DeathtrapDungeonOptions(PerGameCommonOptions):
 option_groups = [
     OptionGroup(
         "Goal Options",
-        [Goal, RequiredAmulets],
+        [GemHunt],
     ),
     OptionGroup(
         "Location Options",
-        [Clearingsanity, Spellsanity, Wizardsanity, ExtraLocations],
+        [Trialmastersanity, Championsanity, ShuffleShield, ShufflePotion, ExtraLocations],
     ),
     OptionGroup(
         "Item Options",
-        [ProgressiveStats, FillerWeights],
+        [ProgressiveStats, PackSize, FillerWeights],
     ),
 ]
 
 option_presets = {
     "Recommended": {
-        "goal": Goal.option_all,
-        "required_amulets": 5,
-        "clearingsanity": True,
-        "spellsanity": True,
-        "wizardsanity": True,
+        "pack_size": 2,
+        "gem_hunt": True,
+        "shuffle_shield": True,
+        "shuffle_potion": True,
+        "trialmastersanity": True,
+        "championsanity": True,
         "extra_locations": True,
         "progressive_stats": True,
         "filler_weights": FillerWeights.default,
