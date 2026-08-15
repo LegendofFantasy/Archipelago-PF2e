@@ -39,12 +39,7 @@ class DeathtrapDungeonWorld(World):
     def __init__(self, world: MultiWorld, player: int):
         super().__init__(world, player)
 
-        self.starting_wizard = ""
-
     def generate_early(self) -> None:
-
-        if self.options.wizardsanity:
-            self.starting_wizard = self.random.choice(["Selator", "Poomchukker", "Grimslade"])
 
         # Universal Tracker Support
         re_gen_passthrough = getattr(self.multiworld, "re_gen_passthrough", {})
@@ -52,13 +47,12 @@ class DeathtrapDungeonWorld(World):
             # Get the passed through slot data from the real generation
             slot_data = re_gen_passthrough[self.game]
 
-            self.options.goal.value = slot_data["goal"]
-            self.options.required_amulets.value = slot_data["required_amulets"]
-            self.options.clearingsanity.value = slot_data["clearingsanity"]
-            self.options.spellsanity.value = slot_data["spellsanity"]
+            self.options.gem_hunt.value = slot_data["gem_hunt"]
+            self.options.shuffle_shield.value = slot_data["shuffle_shield"]
+            self.options.shuffle_potion.value = slot_data["shuffle_potion"]
+            self.options.trialmastersanity.value = slot_data["trialmastersanity"]
+            self.options.championsanity.value = slot_data["championsanity"]
             self.options.extra_locations.value = slot_data["extra_locations"]
-            self.options.wizardsanity.value = slot_data["wizardsanity"]
-            self.starting_wizard = slot_data["starting_wizard"]
 
         # Sanitize options
         if self.options.progressive_stats and not self.options.extra_locations:
@@ -82,9 +76,9 @@ class DeathtrapDungeonWorld(World):
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         data =  self.options.as_dict(
-            "goal", "required_amulets", "clearingsanity", "spellsanity", "wizardsanity", "extra_locations"
+            "gem_hunt", "shuffle_shield", "shuffle_potion", "trialmastersanity",
+            "championsanity", "extra_locations", "pack_size"
         )
-        data["starting_wizard"] = self.starting_wizard
         return data
 
     @staticmethod
