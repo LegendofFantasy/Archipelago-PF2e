@@ -150,19 +150,44 @@ def create_item_with_correct_classification(world: DeathtrapDungeonWorld, name: 
 def create_all_items(world: DeathtrapDungeonWorld) -> None:
 
     itempool: list[Item] = [
-        world.create_item("Golden Magnet"),
-        world.create_item("Violet Jewel"),
-        world.create_item("Secret Word"),
-        world.create_item("Gold Chain"),
-        world.create_item("Magic Sword"),
-        world.create_item("Horn of a Unicorn"),
-        world.create_item("Magic Potion"),
-        world.create_item("Ranger's Helmet"),
-        world.create_item("Sword Tree Seeds"),
-        world.create_item("Red Cloak"),
-        world.create_item("Great Magic Sword"),
-        world.create_item("Parrot Feathers"),
-        world.create_item("Dire Beast Claws"),
+        world.create_item("Emerald"), # Idol's Left Eye
+        world.create_item("Gold Piece"), # Abandoned Backpack
+        world.create_item("Chainmail"), # Slay the Dwarf
+        world.create_item("Grappling Iron"), # Iron Grille - Loose
+        world.create_item("Brass Bell"), # Iron Grille - Leather Pouch
+        world.create_item("Dagger"), # Pit of Worms
+        world.create_item("Shield"), # Trapdoor in the Sand
+        world.create_item("Goblet"), # Goblet of Red Liquid
+        world.create_item("Doppelganger Potion"), # Demon Chair's Secret Panel
+        world.create_item("Wooden Ball"), # Wooden Ball 1
+        world.create_item("Wooden Ball"), # Wooden Ball 2
+        world.create_item("Pearl"), # Wooden Casket
+        world.create_item("Iron Key"), # Wooden Box in the Iron Pipe 1
+        world.create_item("Sapphire"), # Wooden Box in the Iron Pipe 2
+        world.create_item("Bamboo Stilts"), # Shop in the Tunnel
+        world.create_item("Rope"), # Hanging from an Iron Hook
+        world.create_item("Leprechaun Tooth"), # Slay Both Guard Dogs
+        world.create_item("Old Bone"), # Ivy's Cupboard
+        world.create_item("Ninja's Weapons"), # Taking the Ninja's Weapons
+        world.create_item("Winged Helmet"), # Pole Across the Chasm
+        world.create_item("Ring of Wishes"), # Gift from the Booming Voice
+        world.create_item("Hollow Wooden Tube"), # Slay the Orcs 1
+        world.create_item("Gold Piece"), # Slay the Orcs 2
+        world.create_item("Gold Piece"), # Gift from Sukumvit 1
+        world.create_item("Gold Piece"), # Gift from Sukumvit 2
+        world.create_item("Topaz"), # Skull's Left Eye
+        world.create_item("Topaz"), # Skull's Right Eye
+        world.create_item("Bone Monkey Charm"), # Gift from the Elf 1
+        world.create_item("Mirror"), # Gift from the Elf 2
+        world.create_item("Dagger"), # Gift from the Elf 3
+        world.create_item("Dagger"), # Gift from the Elf 4
+        world.create_item("Ruby"), # Bottom of the Pit
+        world.create_item("Wooden Mallet"), # Goblins' Cupboard 1
+        world.create_item("Iron Spikes"), # Goblins' Cupboard 2
+        world.create_item("Garnet"), # Slay the Medusa
+        world.create_item("Diamond"), # Slay the Ninja
+        world.create_item("Necklace"), # Orc's Necklace
+        world.create_item("Jug of Acid") # Slay the Hobgoblins
     ]
 
     if world.options.progressive_stats:
@@ -181,88 +206,36 @@ def create_all_items(world: DeathtrapDungeonWorld) -> None:
             world.create_item("Progressive Luck"),
             world.create_item("Progressive Luck"),
             world.create_item("Progressive Luck"),
-            world.create_item("Progressive Luck"),
+            world.create_item("Progressive Luck")
         ])
 
-    if world.options.spellsanity:
-        itempool.extend([
-            world.create_item("Skill Spell Gem"),
-            world.create_item("Skill Spell Gem"),
-            world.create_item("Skill Spell Gem"),
-            world.create_item("Stamina Spell Gem"),
-            world.create_item("Stamina Spell Gem"),
-            world.create_item("Stamina Spell Gem"),
-            world.create_item("Luck Spell Gem"),
-            world.create_item("Luck Spell Gem"),
-            world.create_item("Luck Spell Gem"),
-            world.create_item("Luck Spell Gem"), # extra from Unicorn clearing
-            world.create_item("Fire Spell Gem"),
-            world.create_item("Fire Spell Gem"),
-            world.create_item("Fire Spell Gem"),
-            world.create_item("Ice Spell Gem"),
-            world.create_item("Ice Spell Gem"),
-            world.create_item("Ice Spell Gem"),
-            world.create_item("Illusion Spell Gem"),
-            world.create_item("Illusion Spell Gem"),
-            world.create_item("Illusion Spell Gem"),
-            world.create_item("Friendship Spell Gem"),
-            world.create_item("Friendship Spell Gem"),
-            world.create_item("Friendship Spell Gem"),
-            world.create_item("Friendship Spell Gem"), # extra from Unicorn clearing
-            world.create_item("Growth Spell Gem"),
-            world.create_item("Growth Spell Gem"),
-            world.create_item("Growth Spell Gem"),
-            world.create_item("Bless Spell Gem"),
-            world.create_item("Bless Spell Gem"),
-            world.create_item("Bless Spell Gem"),
-            world.create_item("Fear Spell Gem"),
-            world.create_item("Fear Spell Gem"),
-            world.create_item("Withering Spell Gem"),
-            world.create_item("Withering Spell Gem"),
-            world.create_item("Curse Spell Gem"),
-            world.create_item("Curse Spell Gem"),
+    if world.options.shuffle_shield:
+        itempool.extend([world.create_item("Shield")]) # Starting Shield
+
+    if world.options.shuffle_potion:
+        itempool.extend([ # Starting Potion
+            world.create_item(world.random.choice(["Potion of Skill", "Potion of Strength", "Potion of Fortune"]))
         ])
 
-    if world.options.clearingsanity:
+    if world.options.trialmastersanity:
         itempool.extend([
-            world.create_item("Clearing 3"),
-            world.create_item("Clearing 4"),
-            world.create_item("Clearing 5"),
-            world.create_item("Clearing 6"),
-            world.create_item("Clearing 7"),
-            world.create_item("Clearing 8"),
-            world.create_item("Clearing 9"),
-            world.create_item("Clearing 10"),
-            world.create_item("Clearing 11"),
-            world.create_item("Clearing 12"),
-            world.create_item("Clearing 13"),
-            world.create_item("Clearing 14"),
-            world.create_item("Clearing 15"),
-            world.create_item("Clearing 16"),
-            world.create_item("Clearing 17"),
-            world.create_item("Clearing 18"),
-            world.create_item("Clearing 19"),
-            world.create_item("Clearing 20"),
-            world.create_item("Clearing 21"),
-            world.create_item("Clearing 23"),
-            world.create_item("Clearing 24"),
-            world.create_item("Clearing 25"),
-            world.create_item("Clearing 26"),
-            world.create_item("Clearing 27"),
-            world.create_item("Clearing 28"),
-            world.create_item("Clearing 29"),
-            world.create_item("Clearing 30"),
-            world.create_item("Clearing 32"),
-            world.create_item("Clearing 33"),
-            world.create_item("Clearing 34"),
-            world.create_item("Clearing 35"),
+            world.create_item("Horath"),
+            world.create_item("Torgrim"),
+            world.create_item("Thomas"),
+            world.create_item("Ivy"),
+            world.create_item("Ian Livingstone"),
+            world.create_item("Igbut"),
+            world.create_item("Servant of the Trialmasters")
         ])
 
-    if world.options.wizardsanity:
+    if world.options.championsanity:
         itempool.extend([
-            world.create_item(i) for i in ["Selator", "Poomchukker", "Grimslade"] if i != world.starting_wizard
+            world.create_item("Elf"),
+            world.create_item("Ninja"),
+            world.create_item("Knight"),
+            world.create_item("Throm"),
+            world.create_item("Barbarian")
         ])
-        world.push_precollected(world.create_item(world.starting_wizard))
 
     filler_count = len(world.multiworld.get_unfilled_locations(world.player)) - len(itempool)
 
