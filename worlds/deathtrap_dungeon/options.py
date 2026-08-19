@@ -64,6 +64,14 @@ class ExtraLocations(Toggle):
 
     display_name = "Extra Locations"
 
+class ExtraLocks(Toggle):
+    """
+    Adds three additional doors to the dungeon which are unlocked by one of two keys. The purpose of these are to
+    reduce the amount of checks available from the beginning and to add some more variety closer to the end.
+    """
+
+    display_name = "Extra Locks"
+
 
 class ProgressiveStats(Toggle):
     """
@@ -101,6 +109,7 @@ class DeathtrapDungeonOptions(PerGameCommonOptions):
     shuffle_potion : ShufflePotion
     trialmastersanity : Trialmastersanity
     championsanity : Championsanity
+    extra_locks : ExtraLocks
     extra_locations : ExtraLocations
     progressive_stats : ProgressiveStats
     filler_weights : FillerWeights
@@ -113,7 +122,7 @@ option_groups = [
     ),
     OptionGroup(
         "Location Options",
-        [Trialmastersanity, Championsanity, ShuffleShield, ShufflePotion, ExtraLocations],
+        [Trialmastersanity, Championsanity, ExtraLocks, ShuffleShield, ShufflePotion, ExtraLocations],
     ),
     OptionGroup(
         "Item Options",
@@ -129,6 +138,7 @@ option_presets = {
         "shuffle_potion": True,
         "trialmastersanity": True,
         "championsanity": True,
+        "extra_locks": True,
         "extra_locations": True,
         "progressive_stats": True,
         "filler_weights": FillerWeights.default,

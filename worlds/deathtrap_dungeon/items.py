@@ -59,13 +59,16 @@ ITEM_NAME_TO_ID = {
     "Knight" : 63,
     "Throm" : 64,
     "Barbarian" : 65,
+    "Brass Key" : 71,
+    "Copper Key" : 72,
 }
 
 ITEM_NAME_GROUPS = {
     "Progressive Statistic" : {"Progressive Skill", "Progressive Stamina", "Progressive Luck"},
     "Progressive Stat" : {"Progressive Skill", "Progressive Stamina", "Progressive Luck"},
     "Trialmaster" : {name for name in ITEM_NAME_TO_ID.keys() if 60 > ITEM_NAME_TO_ID[name] > 50},
-    "Champion" : {name for name in ITEM_NAME_TO_ID.keys() if ITEM_NAME_TO_ID[name] > 60}
+    "Champion" : {name for name in ITEM_NAME_TO_ID.keys() if ITEM_NAME_TO_ID[name] > 60},
+    "Key" : {"Iron Key", "Brass Key", "Copper Key"}
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -119,6 +122,8 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Knight" : ItemClassification.progression,
     "Throm" : ItemClassification.progression,
     "Barbarian" : ItemClassification.progression,
+    "Brass Key" : ItemClassification.progression,
+    "Copper Key" : ItemClassification.progression,
 }
 
 
@@ -235,6 +240,12 @@ def create_all_items(world: DeathtrapDungeonWorld) -> None:
             world.create_item("Knight"),
             world.create_item("Throm"),
             world.create_item("Barbarian")
+        ])
+
+    if world.options.extra_locks:
+        itempool.extend([
+            world.create_item("Brass Key"),
+            world.create_item("Copper Key")
         ])
 
     filler_count = len(world.multiworld.get_unfilled_locations(world.player)) - len(itempool)

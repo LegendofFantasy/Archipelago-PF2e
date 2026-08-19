@@ -52,6 +52,7 @@ class DeathtrapDungeonWorld(World):
             self.options.shuffle_potion.value = slot_data["shuffle_potion"]
             self.options.trialmastersanity.value = slot_data["trialmastersanity"]
             self.options.championsanity.value = slot_data["championsanity"]
+            self.options.extra_locks.value = slot_data["extra_locks"]
             self.options.extra_locations.value = slot_data["extra_locations"]
 
         # Sanitize options
@@ -77,7 +78,7 @@ class DeathtrapDungeonWorld(World):
     def fill_slot_data(self) -> Mapping[str, Any]:
         data =  self.options.as_dict(
             "gem_hunt", "shuffle_shield", "shuffle_potion", "trialmastersanity",
-            "championsanity", "extra_locations", "pack_size"
+            "championsanity", "extra_locks", "extra_locations", "pack_size"
         )
         return data
 

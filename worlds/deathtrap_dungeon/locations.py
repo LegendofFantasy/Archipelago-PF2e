@@ -62,6 +62,8 @@ LOCATION_NAME_TO_ID = {
     "Meeting the Knight" : 63,
     "Meeting Throm" : 64,
     "Meeting the Barbarian" : 65,
+    "Using the Copper Key" : 71,
+    "Using the Brass Key" : 72,
     "Game Over - Dying in the Arena of Death" : 101,
     "Game Over - Lacking a Jewel" : 102,
     "Game Over - Fifty-Metre Freefall" : 103,
