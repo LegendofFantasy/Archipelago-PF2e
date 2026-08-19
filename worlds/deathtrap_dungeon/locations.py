@@ -214,18 +214,7 @@ def add_locations_to_region(world: DeathtrapDungeonWorld, region: str, locations
 
 def create_events(world: DeathtrapDungeonWorld) -> None:
 
-    add_events_to_region(world, "Fenmarge", {
-        "Give Antherica to Selator" : "Selator Victory",
-        "Give Map to Poomchukker" : "Poomchukker Victory",
-        "Give Amulets to Grimslade" : "Grimslade Victory"
-    })
-    add_events_to_region(world, "Willowbend", {"Reach Willowbend" : "Map to Willowbend"})
-    add_events_to_region(world, "Clearing 4", {"Slay the Master of Wolves" : "Wolf Amulet"})
-    add_events_to_region(world, "Clearing 8", {"Rob the Master of Frogs" : "Frog Amulet"})
-    add_events_to_region(world, "Clearing 11", {"Antherica Bush" : "Antherica Berry"})
-    add_events_to_region(world, "Clearing 14", {"Negotiate with the Mistress of Birds" : "Bird Amulet"})
-    add_events_to_region(world, "Clearing 17", {"Slay the Master of Spiders" : "Spider Amulet"})
-    add_events_to_region(world, "Clearing 27", {"Slay the Master of Gardens" : "Flower Amulet"})
+    add_events_to_region(world, "Return to Fang", {"Beat Deathtrap Dungeon" : "Victory"})
 
 
 def add_events_to_region(world: DeathtrapDungeonWorld, region: str, events: dict[str,str]) -> None:

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from worlds.generic.Rules import set_rule, add_rule
-from .options import Goal
+from rule_builder.options import OptionFilter
+from rule_builder.rules import Has, HasAll, Rule
 
 if TYPE_CHECKING:
     from .world import DeathtrapDungeonWorld
@@ -171,27 +171,4 @@ def set_all_location_rules(world: DeathtrapDungeonWorld) -> None:
 
 
 def set_completion_condition(world: DeathtrapDungeonWorld) -> None:
-    if world.options.goal == Goal.option_selator:
-        world.multiworld.completion_condition[world.player] = lambda state: state.has(
-            "Selator Victory", world.player
-        )
-    elif world.options.goal == Goal.option_poomchukker:
-        world.multiworld.completion_condition[world.player] = lambda state: state.has(
-            "Poomchukker Victory", world.player
-        )
-    elif world.options.goal == Goal.option_grimslade:
-        world.multiworld.completion_condition[world.player] = lambda state: state.has(
-            "Grimslade Victory", world.player
-        )
-    elif world.options.goal == Goal.option_any:
-        world.multiworld.completion_condition[world.player] = lambda state: state.has_any((
-            "Selator Victory",
-            "Grimslade Victory",
-            "Poomchukker Victory"
-        ), world.player)
-    elif world.options.goal == Goal.option_all:
-        world.multiworld.completion_condition[world.player] = lambda state: state.has_all((
-            "Selator Victory",
-            "Grimslade Victory",
-            "Poomchukker Victory"
-        ), world.player)
+    world.set_completion_rule(Has("Victory"))

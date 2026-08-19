@@ -3,6 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Region
+from rule_builder.options import OptionFilter
+from rule_builder.rules import Has, HasAll, Rule
+
+from .options import Trialmastersanity, Championsanity, ExtraLocks, GemHunt
 
 if TYPE_CHECKING:
     from .world import DeathtrapDungeonWorld
@@ -16,144 +20,77 @@ def create_and_connect_regions(world: DeathtrapDungeonWorld) -> None:
 def create_all_regions(world: DeathtrapDungeonWorld) -> None:
 
     regions = [
-        Region("Fenmarge", world.player, world.multiworld),
-        Region("Willowbend", world.player, world.multiworld),
+        Region(region, world.player, world.multiworld) for region in {
+            "Fang",
+            "Entrance Area",
+            "Barbarian's Room",
+            "Pre-Throm Area",
+            "Horath's Room",
+            "Ian's Room",
+            "Throm's Area",
+            "Torgrim's Trial and the Troglodytes",
+            "Servant's Encounter",
+            "North Past Torgrim",
+            "Far West Past Torgrim",
+            "Elf's Room",
+            "Past the Iron Key Door",
+            "North Routes' Convergence"
+            "Thomas's Encounter",
+            "Ivy through Pit Fiend Encounters",
+            "Ninja's Encounter",
+            "Bloodbeast and Manticore Encounters",
+            "Igbut's Encounter",
+            "Return to Fang"
+        }
     ]
-
-    regions.extend([
-        Region(f"Clearing {i}", world.player, world.multiworld) for i in range(1, 36) if i not in {2, 22, 31}
-    ])
 
     world.multiworld.regions += regions
 
 
 def connect_regions(world: DeathtrapDungeonWorld) -> None:
 
-    # Connect Fenmarge
-    world.get_region("Fenmarge").connect(world.get_region("Clearing 1"), "Fenmarge to Clearing 1")
+    connect(world, "Fang", "Entrance Area", "Entering Deathtrap Dungeon")
+    connect(world, "Entrance Area", "Barbarian's Room", "Barbarian's Door",
+            Has("Barbarian") | OptionFilter(Championsanity, False))
+    connect(world, "Entrance Area", "Pre-Throm Area", "Entrance Area to Pre-Throm Area",
+            Has("Copper Key") | OptionFilter(ExtraLocks, False))
+    connect(world, "Pre-Throm Area", "Horath's Room", "Horath's Door",
+            Has("Horath") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Pre-Throm Area", "Ian's Room", "Ian's Door",
+            Has("Ian Livingstone") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Pre-Throm Area", "Throm's Area", "Encounter Throm",
+            Has("Throm") | OptionFilter(Championsanity, False))
+    connect(world, "Throm's Area", "Torgrim's Trial and the Troglodytes", "Torgrim's Door",
+            Has("Torgrim") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Torgrim's Trial and the Troglodytes", "Servant's Encounter", "Meet the Servant",
+            Has("Servant of the Trialmasters") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Torgrim's Trial and the Troglodytes", "North Past Torgrim",
+            "Head North After the Trial", Has("Brass Key") | OptionFilter(ExtraLocks, False))
+    connect(world, "North Past Torgrim", "North Routes' Convergence", "Continue North")
+    connect(world, "North Routes' Convergence", "Bloodbeast and Manticore Encounters", "North Chute")
+    connect(world, "Torgrim's Trial and the Troglodytes", "Far West Past Torgrim",
+            "Head West After the Trial", Has("Brass Key") | OptionFilter(ExtraLocks, False))
+    connect(world, "Far West Past Torgrim", "Bloodbeast and Manticore Encounters", "West Chutes")
+    connect(world, "Torgrim's Trial and the Troglodytes", "Elf's Room", "Elf's Door",
+            Has("Elf") | OptionFilter(Championsanity, False))
+    connect(world, "Torgrim's Trial and the Troglodytes", "Past the Iron Key Door", "Iron Key Door",
+            Has("Iron Key"))
+    connect(world, "Past the Iron Key Door", "North Routes' Convergence",
+            "Don't Go Up in the Basket")
+    connect(world,"Past the Iron Key Door", "Thomas's Encounter", "Talk to Thomas",
+            Has("Thomas") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Thomas's Encounter", "Ivy through Pit Fiend Encounters", "Go Up In the Basket",
+            Has("Ivy") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Ivy through Pit Fiend Encounters", "Ninja's Encounter", "Fight the Ninja",
+            Has("Ninja") | OptionFilter(Championsanity, False))
+    connect(world, "Ninja's Encounter", "Bloodbeast and Manticore Encounters", "Post-Ninja Chute")
+    connect(world, "Bloodbeast and Manticore Encounters", "Igbut's Encounter", "Talk to Igbut",
+            Has("Igbut") | OptionFilter(Trialmastersanity, False))
+    connect(world, "Igbut's Encounter", "Return to Fang", "Pass the Final Trial",
+            HasAll("Emerald", "Diamond", "Sapphire") & (
+                    HasAll("Pearl", "Topaz", "Ruby", "Garnet") | OptionFilter(GemHunt, False))
+            )
 
-    # Connect Willowbend
-    # You always need Clearing 10 to get to Willowbend so we don't need to check clearingsanity; we can always go back
-    world.get_region("Willowbend").connect(world.get_region("Clearing 10"), "Willowbend to Clearing 10")
 
-    # Connect Clearing 1
-    connect_clearings(world, 1, [12, 4])
-
-    # Connect Clearing 3
-    connect_clearings(world, 3, [13, 21, 26])
-
-    # Connect Clearing 4
-    connect_clearings(world, 4, [34])
-    # Clearing 1 doesn't ever have an item requirement
-    world.get_region("Clearing 4").connect(world.get_region("Clearing 1"), "Clearing 4 to Clearing 1")
-
-    # Connect Clearing 5
-    connect_clearings(world, 5, [9, 29, 24])
-
-    # Connect Clearing 6
-    connect_clearings(world, 6, [18])
-
-    # Connect Clearing 7
-    connect_clearings(world, 7, [11, 30, 32, 15, 19])
-
-    # Connect Clearing 8
-    connect_clearings(world, 8, [26])
-
-    # Connect Clearing 9
-    connect_clearings(world, 9, [5, 13, 20])
-
-    # Connect Clearing 10
-    connect_clearings(world, 10, [28])
-    # Willowbend doesn't ever have an item requirement
-    world.get_region("Clearing 10").connect(world.get_region("Willowbend"), "Clearing 10 to Willowbend")
-
-    # Connect Clearing 11
-    connect_clearings(world, 11, [7])
-
-    # Connect Clearing 12
-    connect_clearings(world, 12, [17, 25])
-    # Clearing 1 doesn't ever have an item requirement
-    world.get_region("Clearing 12").connect(world.get_region("Clearing 1"), "Clearing 12 to Clearing 1")
-
-    # Connect Clearing 13
-    connect_clearings(world, 13, [9, 35, 3])
-
-    # Connect Clearing 14
-    connect_clearings(world, 14, [23])
-    # Clearing 14 connects to 16 only in clearingsanity; otherwise this connection is irrelevant
-    if world.options.clearingsanity:
-        world.get_region("Clearing 14").connect(world.get_region("Clearing 16"), "Clearing 14 to Clearing 16",
-                               lambda state: state.has("Clearing 16", world.player))
-
-    # Connect Clearing 15
-    connect_clearings(world, 15, [19, 28, 7, 32])
-
-    # Connect Clearing 16
-    connect_clearings(world, 16, [35, 32, 30])
-
-    # Connect Clearing 17
-    connect_clearings(world, 17, [24, 12])
-
-    # Connect Clearing 18
-    connect_clearings(world, 18, [6, 29, 34])
-
-    # Connect Clearing 19
-    connect_clearings(world, 19, [27, 15, 32, 7])
-
-    # Connect Clearing 20
-    connect_clearings(world, 20, [33, 9])
-
-    # Connect Clearing 21
-    connect_clearings(world, 21, [3])
-
-    # Connect Clearing 23
-    connect_clearings(world, 23, [14, 29])
-
-    # Connect Clearing 24
-    connect_clearings(world, 24, [5, 26, 17])
-
-    # Connect Clearing 25
-    connect_clearings(world, 25, [12])
-
-    # Connect Clearing 26
-    connect_clearings(world, 26, [3, 8, 24])
-
-    # Connect Clearing 27
-    connect_clearings(world, 27, [19])
-
-    # Connect Clearing 28
-    connect_clearings(world, 28, [10, 15])
-
-    # Connect Clearing 29
-    connect_clearings(world, 29, [23, 33, 5, 18])
-
-    # Connect Clearing 30
-    connect_clearings(world, 30, [16, 7])
-
-    # Connect Clearing 32
-    connect_clearings(world, 32, [16, 15, 19, 7])
-
-    # Connect Clearing 33
-    connect_clearings(world, 33, [29, 20])
-    # Clearing 33 connects to 35 using an Ice Spell Gem; only relevant for clearingsanity and spellsanity
-    if world.options.clearingsanity and world.options.spellsanity:
-        world.get_region("Clearing 33").connect(world.get_region("Clearing 35"), "Clearing 33 to Clearing 35",
-                               lambda state: state.has_all(("Clearing 35", "Ice Spell Gem"), world.player))
-
-    # Connect Clearing 34
-    connect_clearings(world, 34, [18, 4])
-
-    # Connect Clearing 35
-    connect_clearings(world, 35, [13, 16])
-
-def connect_clearings(world: DeathtrapDungeonWorld, source: int, targets: list[int]):
-    current_region = world.get_region(f"Clearing {source}")
-    if world.options.clearingsanity:
-        for target in targets:
-            current_region.connect(world.get_region(f"Clearing {target}"),
-                                   f"Clearing {source} to Clearing {target}",
-                                   lambda state, t=target: state.has(f"Clearing {t}", world.player))
-    else:
-        for target in targets:
-            current_region.connect(world.get_region(f"Clearing {target}"),
-                                   f"Clearing {source} to Clearing {target}")
+def connect(world: DeathtrapDungeonWorld, source: str, target: str, name: str, rule: Rule = None) -> None:
+    world.get_region(source).connect(world.get_region(target), name, rule)
