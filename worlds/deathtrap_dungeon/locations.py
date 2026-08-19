@@ -91,7 +91,7 @@ LOCATION_NAME_TO_ID = {
 LOCATION_NAME_GROUPS = {
     "Game Over" : {name for name in LOCATION_NAME_TO_ID.keys() if LOCATION_NAME_TO_ID[name] > 100},
     "Trialmaster" : {name for name in LOCATION_NAME_TO_ID.keys() if 60 > LOCATION_NAME_TO_ID[name] > 50},
-    "Champion" : {name for name in LOCATION_NAME_TO_ID.keys() if LOCATION_NAME_TO_ID[name] > 60},
+    "Champion" : {name for name in LOCATION_NAME_TO_ID.keys() if 70 > LOCATION_NAME_TO_ID[name] > 60},
 }
 
 
@@ -111,101 +111,136 @@ def create_all_locations(world: DeathtrapDungeonWorld) -> None:
 def create_regular_locations(world: DeathtrapDungeonWorld) -> None:
 
     # Start with the always included locations
-    add_locations_to_region(world, "Fenmarge", ["Slay Grimslade", "Gift from Grimslade"])
-    add_locations_to_region(world, "Clearing 4", ["Gift from the Master of Wolves"])
-    add_locations_to_region(world, "Clearing 5", ["Fallen Fighter"])
-    add_locations_to_region(world, "Clearing 6", ["Slay the Dire Beast"])
-    add_locations_to_region(world, "Clearing 9", ["Slay the Thief"])
-    add_locations_to_region(world, "Clearing 14", ["Slay the Parrot", "Gift from the Mistress of Birds"])
-    add_locations_to_region(world, "Clearing 16", ["Eagle's Nest"])
-    add_locations_to_region(world, "Clearing 18", ["Slay the Sword Trees"])
-    add_locations_to_region(world, "Clearing 19", ["Slay the Ranger"])
-    add_locations_to_region(world, "Clearing 25", ["Slay the Pool Beast"])
-    add_locations_to_region(world, "Clearing 29", ["Slay the Unicorn"])
+    add_locations_to_region(world, "Entrance Area", [
+        "Idol's Left Eye",
+        "Abandoned Backpack",
+        "Pit of Worms",
+        "Hanging from an Iron Hook",
+        "Gift from the Booming Voice",
+        "Slay the Orcs 1",
+        "Slay the Orcs 2",
+        "Gift from Sukumvit 1",
+        "Gift from Sukumvit 2",
+        "Slay the Hobgoblins"
+    ])
+    add_locations_to_region(world, "Barbarian's Room", [
+        "Goblet of Red Liquid"
+    ])
+    add_locations_to_region(world, "Pre-Throm Area", [
+        "Wooden Ball 1",
+        "Wooden Ball 2",
+        "Wooden Box in the Iron Pipe 1",
+        "Wooden Box in the Iron Pipe 2",
+        "Skull's Left Eye",
+        "Skull's Right Eye",
+        "Bottom of the Pit",
+        "Goblins' Cupboard 1",
+        "Goblins' Cupboard 2",
+        "Orc's Necklace"
+    ])
+    add_locations_to_region(world, "Torgrim's Trial and the Troglodytes", [
+        "Slay the Dwarf",
+        "Iron Grille - Loose",
+        "Iron Grille - Leather Pouch",
+        "Demon Chair's Secret Panel"
+    ])
+    add_locations_to_region(world, "Elf's Room", [
+        "Gift from the Elf 1",
+        "Gift from the Elf 2",
+        "Gift from the Elf 3",
+        "Gift from the Elf 4"
+    ])
+    add_locations_to_region(world, "North Past Torgrim", [
+        "Wooden Casket",
+        "Shop in the Tunnel"
+    ])
+    add_locations_to_region(world, "Far West Past Torgrim", [
+        "Pole Across the Chasm",
+        "Slay the Medusa"
+    ])
+    add_locations_to_region(world, "Ivy through Pit Fiend Encounters", [
+        "Trapdoor in the Sand",
+        "Slay Both Guard Dogs",
+        "Ivy's Cupboard"
+    ])
+    add_locations_to_region(world, "Ninja's Encounter", [
+        "Taking the Ninja's Weapons",
+        "Slay the Ninja"
+    ])
 
-    # Add the locations for the extra_locations option
+    # Add the locations for shuffle_potion
+    if world.options.shuffle_potion:
+        add_locations_to_region(world, "Fang", ["Starting Potion"])
+
+    # Add the locations for shuffle_shield
+    if world.options.shuffle_shield:
+        add_locations_to_region(world, "Fang", ["Starting Shield"])
+
+    # Add the locations for trialmastersanity
+    if world.options.trialmastersanity:
+        add_locations_to_region(world, "Horath's Room", ["Meeting Horath"])
+        add_locations_to_region(world, "Torgrim's Trial and the Troglodytes", ["Meeting Torgrim"])
+        add_locations_to_region(world, "Thomas's Encounter", ["Meeting Thomas"])
+        add_locations_to_region(world, "Ivy through Pit Fiend Encounters", ["Meeting Ivy"])
+        add_locations_to_region(world, "Ian's Room", ["Meeting Ian Livingstone"])
+        add_locations_to_region(world, "Igbut's Encounter", ["Meeting Igbut"])
+        add_locations_to_region(world, "Servant's Encounter", ["Meeting the Servant"])
+
+    # Add the locations for championsanity
+    if world.options.championsanity:
+        add_locations_to_region(world, "Elf's Room", ["Meeting the Elf"])
+        add_locations_to_region(world, "Ninja's Encounter", ["Meeting the Ninja"])
+        add_locations_to_region(world, "Horath's Room", ["Meeting the Knight"])
+        add_locations_to_region(world, "Throm's Area", ["Meeting Throm"])
+        add_locations_to_region(world, "Barbarian's Room", ["Meeting the Barbarian"])
+
+    # Add the locations for extra_locks
+    if world.options.extra_locks:
+        add_locations_to_region(world, "Pre-Throm Area", ["Using the Copper Key"])
+        add_locations_to_region(world, "Past the Brass Key Door", ["Using the Brass Key"])
+
+    # Add the locations for extra_locations
     if world.options.extra_locations:
-        add_locations_to_region(world, "Fenmarge", [
-            "Game Over - A Hundred Pieces of Gold",
-            "Game Over - Failing Selator's Quest",
-            "Game Over - Itsy Bitsy Spider",
-            "Game Over - Failing Poomchukker's Quest",
-            "Game Over - Magic Carpet Ride",
-            "Game Over - Grimslade's Trap",
-            "Game Over - Out the Window and Into the Dungeons",
-            "Game Over - Slain by Poomchukker's Guards",
-            "Game Over - Explosion of Hellfire",
-            "Game Over - Returning to Grimslade Empty-Handed"
+        add_locations_to_region(world, "Entrance Area", [
+            "Game Over - Hail Sukumvit",
+            "Game Over - Poisoned Emerald",
+            "Game Over - The Bell Tolls for Thee",
+            "Game Over - Drinking Acid",
+            "Game Over - Too Hot to Handle"
         ])
-        add_locations_to_region(world, "Clearing 1", ["Game Over - A Feast for Rats"])
-        add_locations_to_region(world, "Clearing 14", ["Game Over - Curse of the Birds"])
-        add_locations_to_region(world, "Clearing 17", [
-            "Game Over - A Feast for the Spiders",
-            "Game Over - The Master of Spiders Has No Friends"
+        add_locations_to_region(world, "Pre-Throm Area", [
+            "Game Over - Fifty-Metre Freefall",
+            "Game Over - Man in the Mirror",
+            "Game Over - Eating the Mushrooms",
+            "Game Over - Slain by the Rock Grub's Mate",
+            "Game Over - Mirrored Headache",
+            "Game Over - Knock-Knock",
+            "Game Over - Crushed by the Boulder"
         ])
-        add_locations_to_region(world, "Clearing 20", ["Game Over - Crocodile Smile"])
-        add_locations_to_region(world, "Clearing 33", ["Game Over - Dragged Down Into the River"])
-
-    # Add the locations for the spellsanity option
-    if world.options.spellsanity:
-        add_locations_to_region(world, "Fenmarge", [
-            "Selator's Spell Gem 1",
-            "Selator's Spell Gem 2",
-            "Selator's Spell Gem 3",
-            "Selator's Spell Gem 4",
-            "Selator's Spell Gem 5",
-            "Selator's Spell Gem 6",
-            "Selator's Spell Gem 7",
-            "Selator's Spell Gem 8",
-            "Selator's Spell Gem 9",
-            "Poomchukker's Spell Gem 1",
-            "Poomchukker's Spell Gem 2",
-            "Poomchukker's Spell Gem 3",
-            "Poomchukker's Spell Gem 4",
-            "Poomchukker's Spell Gem 5",
-            "Poomchukker's Spell Gem 6",
-            "Grimslade's Spell Gem 1",
-            "Grimslade's Spell Gem 2",
-            "Grimslade's Spell Gem 3",
-            "Grimslade's Spell Gem 4",
-            "Grimslade's Spell Gem 5",
-            "Grimslade's Spell Gem 6",
-            "Grimslade's Spell Gem 7",
-            "Grimslade's Spell Gem 8",
-            "Grimslade's Spell Gem 9"
+        add_locations_to_region(world, "Horath's Room", [
+            "Game Over - Another Stone for the Garden"
         ])
-        add_locations_to_region(world, "Willowbend", [
-            "Halicar's Shop 1",
-            "Halicar's Shop 2",
-            "Halicar's Shop 3",
-            "Halicar's Shop 4",
-            "Halicar's Shop 5",
-            "Halicar's Shop 6"
+        add_locations_to_region(world, "Throm's Area", [
+            "Game Over - Chamber of the Dead"
         ])
-        add_locations_to_region(world, "Clearing 27", [
-            "Gift from the Master of Gardens 1",
-            "Gift from the Master of Gardens 2",
-            "Gift from the Master of Gardens 3"
+        add_locations_to_region(world, "Torgrim's Trial and the Troglodytes", [
+            "Game Over - Dying in the Arena of Death",
+            "Game Over - Between Troglodytes and the River",
+            "Game Over - All Brawn and No Brain"
         ])
-        add_locations_to_region(world, "Clearing 29", [
-            "Unicorn Clearing Spell Gem 1",
-            "Unicorn Clearing Spell Gem 2"
+        add_locations_to_region(world, "North Routes' Convergence", [
+            "Game Over - Crushing Defeat"
         ])
-
-    # add the locations for the clearingsanity option
-    if world.options.clearingsanity:
-        for i in range(1, 36):
-            if i not in {2, 22, 31}:
-                add_locations_to_region(world, f"Clearing {i}", [f"Clearing {i} Entered"])
-
-    # add the locations for the wizardsanity option
-    if world.options.wizardsanity:
-        add_locations_to_region(world, "Fenmarge", [
-            "Gronar - Directions to Selator",
-            "Gronar - Directions to Poomchukker",
-            "Gronar - Directions to Grimslade"
+        add_locations_to_region(world, "Far West Past Torgrim", [
+            "Game Over - Stony Gaze",
+            "Game Over - Falling off the Tightrope"
         ])
-
+        add_locations_to_region(world, "Bloodbeast and Manticore Encounters", [
+            "Game Over - Food for the Bloodbeast"
+        ])
+        add_locations_to_region(world, "Igbut's Encounter", [
+            "Game Over - Lacking a Jewel"
+        ])
 
 
 def add_locations_to_region(world: DeathtrapDungeonWorld, region: str, locations: list[str]) -> None:

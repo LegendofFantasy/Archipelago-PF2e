@@ -67,7 +67,10 @@ class ExtraLocations(Toggle):
 class ExtraLocks(Toggle):
     """
     Adds three additional doors to the dungeon which are unlocked by one of two keys. The purpose of these are to
-    reduce the amount of checks available from the beginning and to add some more variety closer to the end.
+    reduce the amount of checks available from the beginning and to potentially add some more variety closer to the end.
+
+    The keys are respectively the 'Copper Key' and the 'Brass Key' so if you only want one, simply put the other in
+    your starting inventory below.
     """
 
     display_name = "Extra Locks"

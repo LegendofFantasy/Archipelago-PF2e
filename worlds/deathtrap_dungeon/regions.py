@@ -32,9 +32,10 @@ def create_all_regions(world: DeathtrapDungeonWorld) -> None:
             "Servant's Encounter",
             "North Past Torgrim",
             "Far West Past Torgrim",
+            "Past the Brass Key Door",
             "Elf's Room",
             "Past the Iron Key Door",
-            "North Routes' Convergence"
+            "North Routes' Convergence",
             "Thomas's Encounter",
             "Ivy through Pit Fiend Encounters",
             "Ninja's Encounter",
@@ -67,10 +68,13 @@ def connect_regions(world: DeathtrapDungeonWorld) -> None:
     connect(world, "Torgrim's Trial and the Troglodytes", "North Past Torgrim",
             "Head North After the Trial", Has("Brass Key") | OptionFilter(ExtraLocks, False))
     connect(world, "North Past Torgrim", "North Routes' Convergence", "Continue North")
+    connect(world, "North Past Torgrim", "Past the Brass Key Door", "Open the North Brass Key Door")
     connect(world, "North Routes' Convergence", "Bloodbeast and Manticore Encounters", "North Chute")
     connect(world, "Torgrim's Trial and the Troglodytes", "Far West Past Torgrim",
             "Head West After the Trial", Has("Brass Key") | OptionFilter(ExtraLocks, False))
     connect(world, "Far West Past Torgrim", "Bloodbeast and Manticore Encounters", "West Chutes")
+    connect(world, "Far West Past Torgrim", "Past the Brass Key Door",
+            "Open the West Brass Key Door")
     connect(world, "Torgrim's Trial and the Troglodytes", "Elf's Room", "Elf's Door",
             Has("Elf") | OptionFilter(Championsanity, False))
     connect(world, "Torgrim's Trial and the Troglodytes", "Past the Iron Key Door", "Iron Key Door",

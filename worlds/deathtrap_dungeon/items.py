@@ -67,7 +67,7 @@ ITEM_NAME_GROUPS = {
     "Progressive Statistic" : {"Progressive Skill", "Progressive Stamina", "Progressive Luck"},
     "Progressive Stat" : {"Progressive Skill", "Progressive Stamina", "Progressive Luck"},
     "Trialmaster" : {name for name in ITEM_NAME_TO_ID.keys() if 60 > ITEM_NAME_TO_ID[name] > 50},
-    "Champion" : {name for name in ITEM_NAME_TO_ID.keys() if ITEM_NAME_TO_ID[name] > 60},
+    "Champion" : {name for name in ITEM_NAME_TO_ID.keys() if 70 > ITEM_NAME_TO_ID[name] > 60},
     "Key" : {"Iron Key", "Brass Key", "Copper Key"}
 }
 
