@@ -28,13 +28,12 @@ class DeathtrapDungeonWorld(World):
     origin_region_name = "Fang"
 
     ut_can_gen_without_yaml = True
-    # Re-enable this once the tracker is ready
-    #tracker_world: ClassVar[dict[str, Any]] = {
-    #    "map_page_folder": "tracker",
-    #    "map_page_maps": "maps/maps.json",
-    #    "map_page_locations": "locations/locations.json",
-    #    "map_page_groups": [('Main', ['main'])],
-    #}
+    tracker_world: ClassVar[dict[str, Any]] = {
+        "map_page_folder": "tracker",
+        "map_page_maps": "maps/maps.json",
+        "map_page_locations": "locations/locations.json",
+        "map_page_groups": [('Main', ['main'])],
+    }
 
     def __init__(self, world: MultiWorld, player: int):
         super().__init__(world, player)
