@@ -40,10 +40,12 @@ from CommonClient import logger, get_base_parser, ClientCommandProcessor, \
 
 tracker_loaded = False
 try:
-    from worlds.tracker.TrackerClient import TrackerGameContext as SuperContext
+    from worlds.tracker.TrackerClient import (TrackerGameContext as SuperContext,
+                                              TrackerCommandProcessor as SuperCommandProcessor)
     tracker_loaded = True
 except ModuleNotFoundError:
-    from CommonClient import CommonContext as SuperContext
+    from CommonClient import (CommonContext as SuperContext,
+                              ClientCommandProcessor as SuperCommandProcessor)
 
 try:
     from Utils import gui_enabled
@@ -55,7 +57,7 @@ def check_stdin() -> None:
     if Utils.is_windows and sys.stdin:
         print("WARNING: Console input is not routed reliably on Windows, use the GUI instead.")
 
-class DeathtrapDungeonCommandProcessor(ClientCommandProcessor):
+class DeathtrapDungeonCommandProcessor(SuperCommandProcessor):
     pass
 
 class DeathtrapDungeonContext(SuperContext):
