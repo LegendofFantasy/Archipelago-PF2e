@@ -26,7 +26,7 @@ def set_all_location_rules(world: DeathtrapDungeonWorld) -> None:
 
     # Set the rules for simplify_ninja adding an item
     if world.options.simplify_ninja.value == SimplifyNinja.option_item:
-        set_location_rule(world, "Taking the Ninja's Weapons", Has("Weaken the Ninja"))
+        set_location_rule(world, "Taking the Ninja's Weapons", Has("Ninja's Weapons"))
 
 
 def set_location_rule(world: DeathtrapDungeonWorld, name: str, rule: Rule) -> None:

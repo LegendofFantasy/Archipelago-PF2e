@@ -62,7 +62,6 @@ ITEM_NAME_TO_ID = {
     "Barbarian" : 65,
     "Brass Key" : 71,
     "Copper Key" : 72,
-    "Weaken the Ninja" : 73
 }
 
 ITEM_NAME_GROUPS = {
@@ -126,7 +125,6 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Barbarian" : ItemClassification.progression,
     "Brass Key" : ItemClassification.progression,
     "Copper Key" : ItemClassification.progression,
-    "Weaken the Ninja" : ItemClassification.progression,
 }
 
 
@@ -151,6 +149,9 @@ def create_item_with_correct_classification(world: DeathtrapDungeonWorld, name: 
 
     if name in {"Pearl", "Topaz", "Ruby", "Garnet"} and world.options.gem_hunt:
         classification = ItemClassification.progression_deprioritized_skip_balancing
+
+    if name == "Ninja's Weapons" and world.options.simplify_ninja.value == SimplifyNinja.option_item:
+        classification = ItemClassification.progression
 
     return DeathtrapDungeonItem(name, classification, ITEM_NAME_TO_ID[name], world.player)
 
@@ -249,11 +250,6 @@ def create_all_items(world: DeathtrapDungeonWorld) -> None:
         itempool.extend([
             world.create_item("Brass Key"),
             world.create_item("Copper Key")
-        ])
-
-    if world.options.simplify_ninja.value == SimplifyNinja.option_item:
-        itempool.extend([
-            world.create_item("Weaken the Ninja")
         ])
 
     filler_count = len(world.multiworld.get_unfilled_locations(world.player)) - len(itempool)

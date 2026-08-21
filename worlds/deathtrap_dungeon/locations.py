@@ -65,7 +65,6 @@ LOCATION_NAME_TO_ID = {
     "Meeting the Barbarian" : 65,
     "Using the Copper Key" : 71,
     "Using the Brass Key" : 72,
-    "Surrendering your Weapons" : 73,
     "Game Over - Dying in the Arena of Death" : 101,
     "Game Over - Lacking a Jewel" : 102,
     "Game Over - Fifty-Metre Freefall" : 103,
@@ -243,10 +242,6 @@ def create_regular_locations(world: DeathtrapDungeonWorld) -> None:
         add_locations_to_region(world, "Igbut's Encounter", [
             "Game Over - Lacking a Jewel"
         ])
-
-    # Add the location for simplify_ninja
-    if world.options.simplify_ninja.value == SimplifyNinja.option_item:
-        add_locations_to_region(world, "Ivy through Pre-Ninja Encounter", ["Surrendering your Weapons"])
 
 
 def add_locations_to_region(world: DeathtrapDungeonWorld, region: str, locations: list[str]) -> None:

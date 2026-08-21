@@ -50,9 +50,9 @@ class SimplifyNinja(Choice):
     giving up your weapons. This version of the fight is also required to reach a single location.
 
     - never: The Ninja is never debuffed so you always have to do the fight with him at full power. Good luck!
-    - item: Adds an item to the pool that debuffs the Ninja once you have it. This becomes a logical requirement,
-    though with good rolls the fight can be won without it. Adds a location at the spot where you give up your weapons.
-    - always: The Ninja is always debuffed.
+    - item: Adds functionality to the 'Ninja's Weapons' item so it lets you ignore the penalty for the fight. This
+    becomes a logical requirement for winning the fight, though with good rolls the fight can be won without it.
+    - always: The penalty is always ignored for the fight.
     """
 
     display_name = "Simplify Ninja"
