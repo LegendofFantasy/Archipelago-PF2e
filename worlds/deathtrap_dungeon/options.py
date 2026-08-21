@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import OptionGroup, PerGameCommonOptions, ItemDict, Toggle, Range
+from Options import OptionGroup, PerGameCommonOptions, ItemDict, Toggle, Range, Choice
 
 
 class Trialmastersanity(Toggle):
@@ -42,6 +42,26 @@ class GemHunt(Toggle):
     """
 
     display_name = "Gem Hunt"
+
+class SimplifyNinja(Choice):
+    """
+    Adds a way to weaken the Ninja in the variation of the fight with him where you don't have your weapons. This fight
+    is difficult and requires lots of good rolls even if you go in with a Skill of 12 due to being down 4 Skill for
+    giving up your weapons. This version of the fight is also required to reach a single location.
+
+    - never: The Ninja is never debuffed so you always have to do the fight with him at full power. Good luck!
+    - item: Adds an item to the pool that debuffs the Ninja once you have it. This becomes a logical requirement,
+    though with good rolls the fight can be won without it. Adds a location at the spot where you give up your weapons.
+    - always: The Ninja is always debuffed.
+    """
+
+    display_name = "Simplify Ninja"
+
+    option_never = 0
+    option_item = 1
+    option_always = 2
+
+    default = option_always
 
 class PackSize(Range):
     """
@@ -108,6 +128,7 @@ class FillerWeights(ItemDict):
 class DeathtrapDungeonOptions(PerGameCommonOptions):
     pack_size : PackSize
     gem_hunt : GemHunt
+    simplify_ninja : SimplifyNinja
     shuffle_shield : ShuffleShield
     shuffle_potion : ShufflePotion
     trialmastersanity : Trialmastersanity
@@ -128,6 +149,10 @@ option_groups = [
         [Trialmastersanity, Championsanity, ExtraLocks, ShuffleShield, ShufflePotion, ExtraLocations],
     ),
     OptionGroup(
+        "Gameplay Options",
+        [SimplifyNinja],
+    ),
+    OptionGroup(
         "Item Options",
         [ProgressiveStats, PackSize, FillerWeights],
     ),
@@ -137,6 +162,7 @@ option_presets = {
     "Recommended": {
         "pack_size": 2,
         "gem_hunt": True,
+        "simplify_ninja": SimplifyNinja.option_item,
         "shuffle_shield": True,
         "shuffle_potion": True,
         "trialmastersanity": True,

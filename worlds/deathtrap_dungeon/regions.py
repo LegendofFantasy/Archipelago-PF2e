@@ -37,7 +37,7 @@ def create_all_regions(world: DeathtrapDungeonWorld) -> None:
             "Past the Iron Key Door",
             "North Routes' Convergence",
             "Thomas's Encounter",
-            "Ivy through Pit Fiend Encounters",
+            "Ivy through Pre-Ninja Encounter",
             "Ninja's Encounter",
             "Bloodbeast and Manticore Encounters",
             "Igbut's Encounter",
@@ -83,9 +83,9 @@ def connect_regions(world: DeathtrapDungeonWorld) -> None:
             "Don't Go Up in the Basket")
     connect(world,"Past the Iron Key Door", "Thomas's Encounter", "Talk to Thomas",
             Has("Thomas") | OptionFilter(Trialmastersanity, False))
-    connect(world, "Thomas's Encounter", "Ivy through Pit Fiend Encounters", "Go Up In the Basket",
+    connect(world, "Thomas's Encounter", "Ivy through Pre-Ninja Encounter", "Go Up In the Basket",
             Has("Ivy") | OptionFilter(Trialmastersanity, False))
-    connect(world, "Ivy through Pit Fiend Encounters", "Ninja's Encounter", "Fight the Ninja",
+    connect(world, "Ivy through Pre-Ninja Encounter", "Ninja's Encounter", "Fight the Ninja",
             Has("Ninja") | OptionFilter(Championsanity, False))
     connect(world, "Ninja's Encounter", "Bloodbeast and Manticore Encounters", "Post-Ninja Chute")
     connect(world, "Bloodbeast and Manticore Encounters", "Igbut's Encounter", "Talk to Igbut",

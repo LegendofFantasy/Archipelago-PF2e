@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from BaseClasses import Location
 
 from . import items
+from .options import SimplifyNinja
 
 if TYPE_CHECKING:
     from .world import DeathtrapDungeonWorld
@@ -64,6 +65,7 @@ LOCATION_NAME_TO_ID = {
     "Meeting the Barbarian" : 65,
     "Using the Copper Key" : 71,
     "Using the Brass Key" : 72,
+    "Surrendering your Weapons" : 73,
     "Game Over - Dying in the Arena of Death" : 101,
     "Game Over - Lacking a Jewel" : 102,
     "Game Over - Fifty-Metre Freefall" : 103,
@@ -158,7 +160,7 @@ def create_regular_locations(world: DeathtrapDungeonWorld) -> None:
         "Pole Across the Chasm",
         "Slay the Medusa"
     ])
-    add_locations_to_region(world, "Ivy through Pit Fiend Encounters", [
+    add_locations_to_region(world, "Ivy through Pre-Ninja Encounter", [
         "Trapdoor in the Sand",
         "Slay Both Guard Dogs",
         "Ivy's Cupboard"
@@ -181,7 +183,7 @@ def create_regular_locations(world: DeathtrapDungeonWorld) -> None:
         add_locations_to_region(world, "Horath's Room", ["Meeting Horath"])
         add_locations_to_region(world, "Torgrim's Trial and the Troglodytes", ["Meeting Torgrim"])
         add_locations_to_region(world, "Thomas's Encounter", ["Meeting Thomas"])
-        add_locations_to_region(world, "Ivy through Pit Fiend Encounters", ["Meeting Ivy"])
+        add_locations_to_region(world, "Ivy through Pre-Ninja Encounter", ["Meeting Ivy"])
         add_locations_to_region(world, "Ian's Room", ["Meeting Ian Livingstone"])
         add_locations_to_region(world, "Igbut's Encounter", ["Meeting Igbut"])
         add_locations_to_region(world, "Servant's Encounter", ["Meeting the Servant"])
@@ -241,6 +243,10 @@ def create_regular_locations(world: DeathtrapDungeonWorld) -> None:
         add_locations_to_region(world, "Igbut's Encounter", [
             "Game Over - Lacking a Jewel"
         ])
+
+    # Add the location for simplify_ninja
+    if world.options.simplify_ninja.value == SimplifyNinja.option_item:
+        add_locations_to_region(world, "Ivy through Pre-Ninja Encounter", ["Surrendering your Weapons"])
 
 
 def add_locations_to_region(world: DeathtrapDungeonWorld, region: str, locations: list[str]) -> None:
